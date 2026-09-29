@@ -1,23 +1,34 @@
 name: Automated Process Pipeline
 
+# Настройка триггера: запускается при каждом пуше в ветку main
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch: # Позволяет запускать процесс вручную кнопкой
 
 jobs:
   execute-pipeline:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Выделение изолированного сервера (Шаг 2)
 
     steps:
+      # Шаг 1: Получение исходного кода из репозитория
       - name: Step 1 - Code Checkout
         uses: actions/checkout@v4
 
-      - name: Step 2 - Environment Verification
+      # Шаг 3: Сбор данных / Проверка окружения (Имитация верификации)
+      - name: Step 3 - Environment Verification
         run: |
-          echo "Проверка окружения..."
+          echo "Checking system environment..."
           node --version
+          npm --version
 
-      - name: Step 3 - Main Action
+      # Шаг 4: Структурирование и выполнение основной сборки
+      - name: Step 4 - Synthesis and Build
         run: |
-          echo "Выполнение основных шагов инструкции..."
+          echo "Compiling files and generating production build..."
+          # Здесь обычно располагаются команды сборки, например: npm run build
+
+      # Шаг 5: Финальный аудит / Тестирование
+      - name: Step 5 - Final Quality Audit
+        run: |
+          echo "Running automated linter and tests..."
+          # Пример: npm test
