@@ -1,0 +1,23 @@
+name: Automated Process Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # Позволяет запускать процесс вручную кнопкой
+
+jobs:
+  execute-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1 - Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Step 2 - Environment Verification
+        run: |
+          echo "Проверка окружения..."
+          node --version
+
+      - name: Step 3 - Main Action
+        run: |
+          echo "Выполнение основных шагов инструкции..."
